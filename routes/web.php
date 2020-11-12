@@ -19,5 +19,3 @@ Route::get('/', function () {
 });
 
 Route::resource('/recetas',RecetaController::class);
-
-Route::view('/layout','layouts.arquitect');
