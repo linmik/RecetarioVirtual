@@ -21,3 +21,7 @@ Route::get('/', function () {
 Route::resource('/recetas',RecetaController::class);
 
 Route::view('/layout','layouts.arquitect');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
