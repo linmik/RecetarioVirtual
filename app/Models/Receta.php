@@ -17,4 +17,9 @@ class Receta extends Model
         'imagen',
         'categoria'
     ];
+
+    public function categorias()
+    {
+        return $this->belongsTo(Categoria::class);
+    }
 }
