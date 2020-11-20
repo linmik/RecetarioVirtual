@@ -22,4 +22,14 @@ class Receta extends Model
     {
         return $this->belongsTo(Categoria::class);
     }
+
+    public function recetas()
+    {
+        return $this->hasMany(Proceso::class);
+    }
+
+    public function ingredientes()
+    {
+        return $this->hasMany(Ingrediente::class);
+    }
 }
