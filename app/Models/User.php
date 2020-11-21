@@ -10,6 +10,9 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+
+use App\Models\Seguidor;
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -29,6 +32,18 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function seguidores()
+    {
+        //return $this->hasMany(Seguidor::class); //personas que me siguen
+        return $this->belongsToMany(User::class,'seguidores','user_id','seguidor_id');
+
+    }
+
+    public function seguidos()
+    {
+        //return $this->hasMany(Seguidor::class,'seguidor_id'); //personas que sigo
+        return $this->belongsToMany(User::class,'seguidores','seguidor_id','user_id');
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
