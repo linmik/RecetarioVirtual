@@ -49,6 +49,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Receta::class);
     }
+
+    public function recetas_likes(){
+        return $this->belongsToMany(Receta::class,'likes');
+    }
     /**
      * The attributes that should be hidden for arrays.
      *

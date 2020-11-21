@@ -23,7 +23,7 @@ class Receta extends Model
         return $this->belongsTo(Categoria::class);
     }
 
-    public function recetas()
+    public function procesos()
     {
         return $this->hasMany(Proceso::class);
     }
@@ -36,5 +36,15 @@ class Receta extends Model
     public function User()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function Usuarios_likes()
+    {
+        return $this->belongsToMany(User::class,'likes');
+    }
+
+    public function Numero_likes()
+    {
+        return $this->belongsToMany(User::class,'likes')->count();
     }
 }
