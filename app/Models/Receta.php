@@ -32,4 +32,9 @@ class Receta extends Model
     {
         return $this->hasMany(Ingrediente::class);
     }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

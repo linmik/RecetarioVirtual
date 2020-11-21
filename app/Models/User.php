@@ -32,17 +32,22 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function seguidores()
+    public function Seguidores()
     {
         //return $this->hasMany(Seguidor::class); //personas que me siguen
         return $this->belongsToMany(User::class,'seguidores','user_id','seguidor_id');
 
     }
 
-    public function seguidos()
+    public function Seguidos()
     {
         //return $this->hasMany(Seguidor::class,'seguidor_id'); //personas que sigo
         return $this->belongsToMany(User::class,'seguidores','seguidor_id','user_id');
+    }
+
+    public function Recetas()
+    {
+        return $this->hasMany(Receta::class);
     }
     /**
      * The attributes that should be hidden for arrays.
