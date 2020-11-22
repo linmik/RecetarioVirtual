@@ -16,7 +16,7 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h3 class="card-body"><a href="{{isset($receta)? route('recetas.show',[$receta]):route('recetas.index')}}" class="mb-2 mr-2 btn-transition btn btn-outline-primary"><i class="pe-7s-back"></i></a>
-                        Rellena los datos
+                        Ingresa los Procesos
                     </h3>
                     @if (isset($receta))
                         <form action="{{ route('recetas.update', [$receta]) }}" method="POST">
@@ -25,18 +25,17 @@
                         <form action="{{route('recetas.store')}}" method="POST">
                     @endif
                         @csrf
-                        <div class= "position-relative form-group">
+<div class= "position-relative form-group">
                             <label for="titulo" class>Titulo: </label>
                             <input type="text" name="titulo" id="titulo" value="{{old('titulo')?? $receta->titulo ?? ""}}" class="form-control"><br>
                         </div>
                         <div class= "position-relative form-group">
-                            <input type="hidden" name="user_id" id="user_id" value="{{Auth::id()}}">
                             <label for="descripcion" class>Descripción: </label><br>
                             <textarea name="descripcion" id="descripcion" cols="30" rows="3" class="form-control">{{old('descripcion')?? $receta->titulo ?? ""}}</textarea><br>
                         </div>
                         <div class= "position-relative form-group">
-                            <label for="categoria_id" class>categoria:</label>
-                            <select name="categoria_id" id="categoria" class="form-control">
+                            <label for="categoria" class>categoria:</label>
+                            <select name="categoria" id="categoria" class="form-control">
                                 @foreach ($categorias as $categoria)
                                     <option value="{{$categoria->id}}"> {{$categoria->nombre}}</option>
                                 @endforeach
@@ -60,9 +59,11 @@
                             <input type="url" name="imagen" id="imagen" value="{{old('imagen')?? $receta->imagen ?? ""}}" class="form-control"><br>
                         </div>
                         <div class= "position-relative form-group">
-                            <center><button type="submit" class="mt-1 btn btn-primary">Siguiente</button></center>
+                            <center><button type="submit" class="mt-1 btn btn-primary">Agregar</button></center>
                         </div>
+
                     </form>
+                    <a href="{{route("recetas.index")}}">Finalizar</a>
                 </div>
             </div>
         </div>

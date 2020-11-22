@@ -10,8 +10,8 @@
         </div>
         <a href="{{route('recetas.index')}}"  class="mb-2 mr-2 btn-transition btn btn-outline-primary"><i class="pe-7s-back"></i></a>
         <a href="{{route('recetas.edit',[$receta])}}" class= "mb-2 mr-2 btn-transition btn btn-outline-primary">Editar info</a>
-        <p>Categoria: {{ $receta->categoria}} <br>
-        Usuario: {{ $receta->usuario}} <br>
+        <p>Categoria: {{ $receta->categoria->nombre}} <br>
+        Usuario: {{ $receta->User->name}} <br>
         Numero de personas: {{ $receta->num_personas}} <br>
         Costo aprox: {{$receta->costo}} <br>
         likes {{$receta->likes}} <br>

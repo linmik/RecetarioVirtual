@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Receta;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RecetaController extends Controller
 {
@@ -26,7 +28,8 @@ class RecetaController extends Controller
      */
     public function create()
     {
-        return view('recetas.recetaForm');
+        $categorias = Categoria::all();
+        return view('recetas.recetaForm', compact('categorias'));
     }
 
     /**
@@ -38,15 +41,16 @@ class RecetaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'usuario' => ['string','max:255','required'],
             'titulo' => ['string','max:255','required'],
             'descripcion' => ['required'],
             'costo' => ['numeric','required','min:0'],
             'num_personas' => ['numeric','required','min:1','max:1000'],
             'imagen' => ['url','string'],
-            'categoria' => ['string', "required","max:255"]
+            'categoria_id' => ['required','numeric'],
         ]);
-        Receta::create($request->except(''));
+
+        //dd($request->all());
+        Receta::create($request->all());
         return redirect('recetas');
     }
 
@@ -69,7 +73,8 @@ class RecetaController extends Controller
      */
     public function edit(Receta $receta)
     {
-        return view('recetas.recetaForm',compact('receta'));
+        $categorias = Categoria::all();
+        return view('recetas.recetaForm',compact('receta','categorias'));
     }
 
     /**
@@ -82,13 +87,12 @@ class RecetaController extends Controller
     public function update(Request $request, Receta $receta)
     {
         $request->validate([
-            'usuario' => ['string','max:255','required'],
             'titulo' => ['string','max:255','required'],
             'descripcion' => ['required'],
             'costo' => ['numeric','required','min:0'],
             'num_personas' => ['numeric','required','min:1','max:1000'],
             'imagen' => ['url','string'],
-            'categoria' => ['string', "required","max:255"]
+            'categoria_id' => ['required','numeric'],
         ]);
 
         Receta::where('id',$receta->id)->update($request->except('_token','_method'));

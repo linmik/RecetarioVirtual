@@ -9,16 +9,16 @@ class Receta extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'usuario',
+        'user_id',
         'titulo',
         'descripcion',
         'costo',
         'num_personas',
         'imagen',
-        'categoria'
+        'categoria_id'
     ];
 
-    public function categorias()
+    public function categoria()
     {
         return $this->belongsTo(Categoria::class);
     }
