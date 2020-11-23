@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -28,5 +29,3 @@ Route::get('/recetas/{Receta}/agregarProceso',[RecetaController::class,'agregarP
 Route::resource('/recetas',RecetaController::class)->middleware('auth');
 
 Route::resource('/procesos',ProcesoController::class)->middleware('auth');
-
-
