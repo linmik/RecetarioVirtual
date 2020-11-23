@@ -9,12 +9,42 @@ class Receta extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'usuario',
+        'user_id',
         'titulo',
         'descripcion',
         'costo',
         'num_personas',
         'imagen',
-        'categoria'
+        'categoria_id'
     ];
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);
+    }
+
+    public function procesos()
+    {
+        return $this->hasMany(Proceso::class);
+    }
+
+    public function ingredientes()
+    {
+        return $this->hasMany(Ingrediente::class);
+    }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function Usuarios_likes()
+    {
+        return $this->belongsToMany(User::class,'likes');
+    }
+
+    public function Numero_likes()
+    {
+        return $this->belongsToMany(User::class,'likes')->count();
+    }
 }

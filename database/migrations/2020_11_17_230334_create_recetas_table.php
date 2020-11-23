@@ -15,14 +15,14 @@ class CreateRecetasTable extends Migration
     {
         Schema::create('recetas', function (Blueprint $table) {
             $table->id();
-            $table->string("usuario");
+            $table->foreignId("user_id")->constrained();
             $table->string("titulo");
             $table->text("descripcion");
             $table->float("costo");
             $table->integer("num_personas",false,true);
             $table->string("imagen");
             $table->integer("likes",false,true)->default(0);
-            $table->string("categoria");
+            $table->foreignId("categoria_id")->constrained();
             $table->timestamps();
         });
     }

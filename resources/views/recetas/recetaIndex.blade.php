@@ -15,8 +15,8 @@
             <div class="col-md-4">
                 <div class="card-shadow-focus border mb-3 card card-body border-info rounded-lg">
                     <div class="card-body">
-                        <h4 class="card-title"><center>{{$receta->titulo}}</center><br>{{$receta->categoria}}</h4>
-                        <h5 class="card-subtitle">Subido por {{$receta->usuario}}</h5>
+                        <h4 class="card-title"><center>{{$receta->titulo}}</center><br>{{$receta->categoria->nombre}}</h4>
+                        <h5 class="card-subtitle">Subido por {{$receta->User->name}}</h5>
                         <center><img src="{{ $receta->imagen}}" alt="imagen receta" onerror="this.src='{{asset('assets/images/image_notfound.jpg')}}';" width="100%"></center>
                         <p>{{$receta->descripcion}}</p>
                         <center><a href="{{route('recetas.show',[$receta])}}" class= "mb-2 mr-2 btn-transition btn btn-outline-primary rounded-pill">Ver detalles</a>

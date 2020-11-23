@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ProcesoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecetaController;
+use App\Models\Proceso;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +20,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/recetas',RecetaController::class);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Route::get('/recetas/{Receta}/agregarProceso',[RecetaController::class,'agregarProcesos'])->name('recetas.agregarProcesos')->middleware('auth');
+Route::resource('/recetas',RecetaController::class)->middleware('auth');
+
+Route::resource('/procesos',ProcesoController::class)->middleware('auth');

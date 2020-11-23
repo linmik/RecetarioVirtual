@@ -30,17 +30,23 @@
                             <input type="text" name="titulo" id="titulo" value="{{old('titulo')?? $receta->titulo ?? ""}}" class="form-control"><br>
                         </div>
                         <div class= "position-relative form-group">
+                            <input type="hidden" name="user_id" id="user_id" value="{{Auth::id()}}">
                             <label for="descripcion" class>Descripción: </label><br>
-                            <textarea name="descripcion" id="descripcion" cols="30" rows="3" class="form-control">{{old('descripcion')?? $receta->titulo ?? ""}}</textarea><br>
+                            <textarea name="descripcion" id="descripcion" cols="30" rows="3" class="form-control">{{old('descripcion')?? $receta->descripcion ?? ""}}</textarea><br>
                         </div>
                         <div class= "position-relative form-group">
-                            <label for="categoria" class>categoria:</label>
-                            <input type="text" name="categoria" id="categoria" value="{{old('categoria')?? $receta->categoria ?? ""}}" class="form-control"><br>
+                            <label for="categoria_id" class>categoria:</label>
+                            <select name="categoria_id" id="categoria" class="form-control">
+                                @foreach ($categorias as $categoria)
+                                    <option value="{{$categoria->id}}"> {{$categoria->nombre}}</option>
+                                @endforeach
+                            </select>
+                            <br>
                         </div>
-                        <div class= "position-relative form-group">
+                       <!-- <div class= "position-relative form-group">
                             <label for="usuario" class>Usuario:</label>
                             <input type="text" name="usuario" id="usuario" value="{{old('usuario')?? $receta->usuario ?? ""}}" class="form-control"><br>
-                        </div>
+                        </div>-->
                         <div class= "position-relative form-group">
                             <label for="costo" class>Costo aproximado: </label>
                             <input step="any" type="number" name="costo" id="costo" value="{{old('costo') ?? $receta->costo ?? ""}}" class="form-control"><br>
@@ -54,7 +60,7 @@
                             <input type="url" name="imagen" id="imagen" value="{{old('imagen')?? $receta->imagen ?? ""}}" class="form-control"><br>
                         </div>
                         <div class= "position-relative form-group">
-                            <center><button type="submit" class="mt-1 btn btn-primary">Enviar</button></center>
+                            <center><button type="submit" class="mt-1 btn btn-primary">Siguiente</button></center>
                         </div>
                     </form>
                 </div>
