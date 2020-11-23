@@ -23,5 +23,14 @@
         </form>
         <center><img src="{{ $receta->imagen}}" alt="imagen receta" onerror="this.src='{{asset('assets/images/image_notfound.jpg')}}';" width="50%"></center>
     </div>
+    <center><h4>Proceso</h4></center>
+    @foreach ($receta->procesos as $proceso)
+    <div class="card-shadow-focus border mb-2 border-secondary">
+        <div class="card-body">
+            <h5>{{$proceso->titulo}}</h5>
+            <h6>{{$proceso->descripcion}}</h6>
+        </div>
+    </div>
+    @endforeach
 </div>
 @endsection

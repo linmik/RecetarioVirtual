@@ -50,8 +50,8 @@ class RecetaController extends Controller
         ]);
 
         //dd($request->all());
-        Receta::create($request->all());
-        return redirect('recetas');
+        $receta = Receta::create($request->all());
+        return redirect()->route('recetas.agregarProcesos',[$receta->id]);
     }
 
     /**
@@ -96,7 +96,7 @@ class RecetaController extends Controller
         ]);
 
         Receta::where('id',$receta->id)->update($request->except('_token','_method'));
-        return redirect()->route('recetas.show',[$receta]);
+        return redirect()->route('recetas.agregarProcesos',[$receta->id]);
     }
 
     /**
@@ -110,5 +110,11 @@ class RecetaController extends Controller
         $receta->delete();
         return redirect()->route('recetas.index');
 
+    }
+
+    public function agregarProcesos($id)
+    {
+        $receta = Receta::find($id);
+        return view("recetas.recetaAgregarProcesos",compact('receta'));
     }
 }

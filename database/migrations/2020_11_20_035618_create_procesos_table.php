@@ -15,8 +15,8 @@ class CreateProcesosTable extends Migration
     {
         Schema::create('procesos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('receta_id')->constrained();
-            $table->tinyInteger('posicion');
+            $table->foreignId('receta_id')->constrained()->onDelete('cascade');
+            //$table->tinyInteger('posicion');
             $table->char('titulo', 100);
             $table->text('descripcion');
         });

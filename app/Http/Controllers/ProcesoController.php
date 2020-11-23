@@ -35,7 +35,14 @@ class ProcesoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'receta_id' => ['numeric','required'],
+            'titulo' => ['string', 'required', 'max:100'],
+            'descripcion' => ['string','required'],
+        ]);
+
+        Proceso::create($request->all());
+        return redirect()->route('recetas.agregarProcesos',[$request->receta_id]);
     }
 
     /**
@@ -57,7 +64,7 @@ class ProcesoController extends Controller
      */
     public function edit(Proceso $proceso)
     {
-        //
+        return view('procesos.procesoEdit',compact('proceso'));
     }
 
     /**
@@ -69,7 +76,12 @@ class ProcesoController extends Controller
      */
     public function update(Request $request, Proceso $proceso)
     {
-        //
+        $request->validate([
+            'titulo' => ['string', 'required', 'max:100'],
+            'descripcion' => ['string','required'],
+        ]);
+        Proceso::where('id',$proceso->id)->update($request->except('_token','_method'));
+        return redirect()->route('recetas.agregarProcesos',[$proceso->receta->id]);
     }
 
     /**
@@ -80,6 +92,8 @@ class ProcesoController extends Controller
      */
     public function destroy(Proceso $proceso)
     {
-        //
+        $receta = $proceso->receta_id;
+        $proceso->delete();
+        return redirect()->route('recetas.agregarProcesos',[$receta]);
     }
 }

@@ -10,6 +10,12 @@ class Proceso extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $fillable = [
+        'receta_id',
+        'titulo',
+        'descripcion'
+    ];
+
     public function receta()
     {
         return $this->belongsTo(Receta::class);

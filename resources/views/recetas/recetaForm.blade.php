@@ -32,7 +32,7 @@
                         <div class= "position-relative form-group">
                             <input type="hidden" name="user_id" id="user_id" value="{{Auth::id()}}">
                             <label for="descripcion" class>Descripción: </label><br>
-                            <textarea name="descripcion" id="descripcion" cols="30" rows="3" class="form-control">{{old('descripcion')?? $receta->titulo ?? ""}}</textarea><br>
+                            <textarea name="descripcion" id="descripcion" cols="30" rows="3" class="form-control">{{old('descripcion')?? $receta->descripcion ?? ""}}</textarea><br>
                         </div>
                         <div class= "position-relative form-group">
                             <label for="categoria_id" class>categoria:</label>
