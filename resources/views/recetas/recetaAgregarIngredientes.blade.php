@@ -14,6 +14,7 @@
     <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
         <div class="main-card mb-3 card">
             <div class="card-body">
+                {{dd($receta->ingredientes)}}
                 @foreach ($receta->ingredientes as $ingrediente)
                     <h6> {{$ingrediente->nombre}}</h6>
                 @endforeach

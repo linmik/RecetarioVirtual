@@ -24,6 +24,7 @@ class CreateRecetasTable extends Migration
             $table->integer("likes",false,true)->default(0);
             $table->foreignId("categoria_id")->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
