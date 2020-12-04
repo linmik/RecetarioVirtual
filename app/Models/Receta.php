@@ -18,6 +18,10 @@ class Receta extends Model
         'categoria_id'
     ];
 
+    public function setNombreAttribute($value){
+        return $this->attributes['titulo'] = ucwords($value);
+    }
+
     public function categoria()
     {
         return $this->belongsTo(Categoria::class);

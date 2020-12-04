@@ -15,4 +15,8 @@ class Ingrediente extends Model
         return $this->belongsToMany(Receta::class);
     }
 
+    public function setNombreAttribute($value){
+        return $this->attributes['nombre'] = ucfirst($value);
+    }
+
 }
