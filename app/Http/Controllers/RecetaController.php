@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Ingrediente;
 use App\Models\Receta;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
@@ -51,7 +52,7 @@ class RecetaController extends Controller
 
         //dd($request->all());
         $receta = Receta::create($request->all());
-        return redirect()->route('recetas.agregarProcesos',[$receta->id]);
+        return redirect()->route('recetas.ingrediente',[$receta->id]);
     }
 
     /**
@@ -96,7 +97,7 @@ class RecetaController extends Controller
         ]);
 
         Receta::where('id',$receta->id)->update($request->except('_token','_method'));
-        return redirect()->route('recetas.agregarProcesos',[$receta->id]);
+        return redirect()->route('recetas.ingrediente',[$receta->id]);
     }
 
     /**
@@ -116,5 +117,24 @@ class RecetaController extends Controller
     {
         $receta = Receta::find($id);
         return view("recetas.recetaAgregarProcesos",compact('receta'));
+    }
+
+    public function ingredientes($id)
+    {
+        $receta = Receta::find($id);
+        return view("recetas.recetaAgregarIngredientes",compact('receta'));
+    }
+
+    public function agregarIngrediente(Request $request, Receta $receta)
+    {
+        $ingrediente = Ingrediente::firstOrCreate(['nombre' => $request->nombre]);
+        $receta->ingredientes()->attach($ingrediente->id);
+        return redirect()->route('recetas.ingrediente',[$receta->id]);
+    }
+
+    public function eliminarIngrediente(Request $request, Receta $receta)
+    {
+        $receta->ingredientes()->attach($request->only('id'));
+        return redirect()->route('recetas.ingrediente',[$receta->id]);
     }
 }
