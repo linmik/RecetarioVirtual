@@ -18,7 +18,7 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        $recetas = Receta::all();
+        $recetas = Receta::with('categoria')->get();
         return view('recetas.recetaIndex',compact('recetas'));
     }
 
