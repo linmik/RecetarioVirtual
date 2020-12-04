@@ -52,7 +52,7 @@ class RecetaController extends Controller
 
         //dd($request->all());
         $receta = Receta::create($request->all());
-        return redirect()->route('recetas.ingrediente',[$receta->id]);
+        return redirect()->route('recetas.ingredientes',[$receta->id]);
     }
 
     /**
@@ -113,9 +113,8 @@ class RecetaController extends Controller
 
     }
 
-    public function agregarProcesos($id)
+    public function agregarProcesos(Receta $receta)
     {
-        $receta = Receta::find($id);
         return view("recetas.recetaAgregarProcesos",compact('receta'));
     }
 
@@ -125,16 +124,16 @@ class RecetaController extends Controller
         return view("recetas.recetaAgregarIngredientes",compact('receta'));
     }
 
-    public function agregarIngrediente(Request $request, Receta $receta)
+    public function agregarIngrediente(Request $request,Receta $receta)
     {
         $ingrediente = Ingrediente::firstOrCreate(['nombre' => $request->nombre]);
-        $receta->ingredientes()->attach($ingrediente->id);
-        return redirect()->route('recetas.ingrediente',[$receta->id]);
+        $receta->ingredientes()->attach($ingrediente->id,['cantidad' => $request->cantidad]);
+        return redirect()->route('recetas.ingredientes',[$receta->id]);
     }
 
     public function eliminarIngrediente(Request $request, Receta $receta)
     {
-        $receta->ingredientes()->attach($request->only('id'));
-        return redirect()->route('recetas.ingrediente',[$receta->id]);
+        //$receta->ingredientes()->attach($request->only('id'));
+        return redirect()->route('recetas.ingredientes',[$receta->id]);
     }
 }

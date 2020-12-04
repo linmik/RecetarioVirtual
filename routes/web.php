@@ -26,11 +26,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/recetas/{Receta}/ingredientes',[RecetaController::class,'ingredientes'])->name('recetas.ingrediente')->middleware('auth');
-Route::post('/recetas/{Receta}/ingredientes',[RecetaController::class,'agregarIngrediente'])->name('recetas.agregarIngrediente')->middleware('auth');
-Route::delete('/recetas/{Receta}/{Ingrediente}',[RecetaController::class,'eliminarIngrediente'])->name('recetas.eliminarIngrediente')->middleware('auth');
+Route::get('/recetas/{receta}/ingredientes',[RecetaController::class,'ingredientes'])->name('recetas.ingredientes')->middleware('auth');
+Route::post('/recetas/{receta}/ingrediente',[RecetaController::class,'agregarIngrediente'])->name('recetas.agregarIngrediente')->middleware('auth');
+Route::delete('/recetas/{receta}/ingrediente/{ingrediente}',[RecetaController::class,'eliminarIngrediente'])->name('recetas.eliminarIngrediente')->middleware('auth');
 
-Route::get('/recetas/{Receta}/agregarProceso',[RecetaController::class,'agregarProcesos'])->name('recetas.agregarProcesos')->middleware('auth');
+Route::get('/recetas/{receta}/agregarProceso',[RecetaController::class,'agregarProcesos'])->name('recetas.agregarProcesos')->middleware('auth');
 Route::resource('/recetas',RecetaController::class)->middleware('auth');
 
 Route::resource('/procesos',ProcesoController::class)->middleware('auth');

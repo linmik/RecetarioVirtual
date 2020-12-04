@@ -10,7 +10,7 @@ class Receta extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
     protected $fillable = [
         'user_id',
         'titulo',
@@ -37,7 +37,7 @@ class Receta extends Model
 
     public function ingredientes()
     {
-        return $this->hasMany(Ingrediente::class);
+        return $this->belongsToMany(Ingrediente::class)->withPivot('cantidad');
     }
 
     public function User()

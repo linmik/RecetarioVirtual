@@ -14,24 +14,21 @@
     <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
         <div class="main-card mb-3 card">
             <div class="card-body">
-                {{dd($receta->ingredientes)}}
                 @foreach ($receta->ingredientes as $ingrediente)
                     <h6> {{$ingrediente->nombre}}</h6>
+                    <h7> {{$ingrediente->pivot->cantidad}}</h7>
                 @endforeach
-                <form action="{{route('',[$proceso])}}" method="post">
-                    @method('DELETE')
-                    @csrf
-                    <button class='mb-2 mr-2 btn-transition btn btn-outline-danger'>Eliminar</button>
-                </form>
             </div>
         </div>
         <div class="main-card mb-3 card">
             <div class="card-body">
-                <form action="{{route('recetas.agregarIngrediente')}}" method="POST">
+                <form action="{{route('recetas.agregarIngrediente',[$receta->id])}}" method="POST">
                     @csrf
                     <div class= "position-relative form-group">
                         <label for="titulo" class>Ingrediente: </label>
                         <input type="text" name="nombre" id="nombre" value="{{old('nombre')}}" class="form-control"><br>
+                        <label for="titulo" class>Cantidad: </label>
+                        <input type="text" name="cantidad" id="cantidad" value="{{old('cantidad')}}" class="form-control"><br>
                     </div>
                     <!--<div class= "position-relative form-group">
                         <input type="hidden" name="receta_id" id="receta_id" value="{{$receta->id}}">
@@ -39,14 +36,14 @@
                         <textarea name="descripcion" id="descripcion" cols="30" rows="3" class="form-control">{{old('descripcion')}}</textarea><br>
                     </div>-->
                     <div class= "position-relative form-group">
-                        <center><button type="submit" class="mt-1 btn btn-primary">Agregar proceso</button></center>
+                        <center><button type="submit" class="mt-1 btn btn-primary">Agregar ingrediente</button></center>
                     </div>
                 </form>
             </div>
         </div>
         <center>
             <div style="height: 30px"></div>
-        <a href="{{route('recetas.show',[$receta->id])}}" class="mt-1 btn btn-danger">Finalizar</a>
+        <a href="{{route('recetas.agregarProcesos',[$receta->id])}}" class="mt-1 btn btn-danger">Siguiente</a>
         </center>
     </div>
 </div>
