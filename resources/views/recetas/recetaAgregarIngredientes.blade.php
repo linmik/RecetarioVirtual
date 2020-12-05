@@ -17,6 +17,12 @@
                 @foreach ($receta->ingredientes as $ingrediente)
                     <h6> {{$ingrediente->nombre}}</h6>
                     <h7> {{$ingrediente->pivot->cantidad}}</h7>
+                    <form action="{{route('recetas.eliminarIngrediente',[$receta,$ingrediente])}}" method="post">
+                        @method('DELETE')
+                        @csrf
+                        <input type="hidden" name="id" id="id" value="{{$ingrediente->id}}">
+                        <button class='mb-2 mr-2 btn-transition btn btn-outline-danger'>Eliminar</button>
+                    </form>
                 @endforeach
             </div>
         </div>

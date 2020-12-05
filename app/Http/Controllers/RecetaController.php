@@ -136,7 +136,7 @@ class RecetaController extends Controller
 
     public function eliminarIngrediente(Request $request, Receta $receta)
     {
-        //$receta->ingredientes()->attach($request->only('id'));
+        $receta->ingredientes()->detach($request->only('id'));
         return redirect()->route('recetas.ingredientes',[$receta->id]);
     }
 }
