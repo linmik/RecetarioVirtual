@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
+
+
     /**
      * The policy mappings for the application.
      *
@@ -25,6 +27,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('admin',function($user){
+            return $user->tipo == "admin";
+        });
     }
 }
