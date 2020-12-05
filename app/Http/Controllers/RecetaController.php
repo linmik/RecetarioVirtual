@@ -99,7 +99,7 @@ class RecetaController extends Controller
         ]);
 
         Receta::where('id',$receta->id)->update($request->except('_token','_method'));
-        return redirect()->route('recetas.ingrediente',[$receta->id]);
+        return redirect()->route('recetas.ingredientes',[$receta->id]);
     }
 
     /**
