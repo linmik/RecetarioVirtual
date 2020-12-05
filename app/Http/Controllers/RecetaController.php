@@ -74,6 +74,7 @@ class RecetaController extends Controller
      */
     public function edit(Receta $receta)
     {
+        $this->authorize('update',$receta);
         $categorias = Categoria::all();
         return view('recetas.recetaForm',compact('receta','categorias'));
     }
@@ -87,6 +88,7 @@ class RecetaController extends Controller
      */
     public function update(Request $request, Receta $receta)
     {
+        $this->authorize('update',$receta);
         $request->validate([
             'titulo' => ['string','max:255','required'],
             'descripcion' => ['required'],
@@ -108,6 +110,7 @@ class RecetaController extends Controller
      */
     public function destroy(Receta $receta)
     {
+        $this->authorize('delete',$receta);
         $receta->delete();
         return redirect()->route('recetas.index');
 

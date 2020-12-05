@@ -9,18 +9,22 @@
             </center>
         </div>
         <a href="{{route('recetas.index')}}"  class="mb-2 mr-2 btn-transition btn btn-outline-primary"><i class="pe-7s-back"></i></a>
-        <a href="{{route('recetas.edit',[$receta])}}" class= "mb-2 mr-2 btn-transition btn btn-outline-primary">Editar info</a>
+        @can('update',$receta)
+            <a href="{{route('recetas.edit',[$receta])}}" class= "mb-2 mr-2 btn-transition btn btn-outline-primary">Editar info</a>
+        @endcan
         <p>Categoria: {{ $receta->categoria->nombre}} <br>
         Usuario: {{ $receta->User->name}} <br>
         Numero de personas: {{ $receta->num_personas}} <br>
         Costo aprox: {{$receta->costo}} <br>
         likes {{$receta->likes}} <br>
         Descripcion: {{ $receta->descripcion}} </p>
-        <form action="{{route('recetas.destroy',[$receta])}}" method="post">
-            @method('DELETE')
-            @csrf
-            <button class='mb-2 mr-2 btn-transition btn btn-outline-danger'>Eliminar</button>
-        </form>
+        @can('delete',$receta)
+            <form action="{{route('recetas.destroy',[$receta])}}" method="post">
+                @method('DELETE')
+                @csrf
+                <button class='mb-2 mr-2 btn-transition btn btn-outline-danger'>Eliminar</button>
+            </form>
+        @endcan
         <center><img src="{{ $receta->imagen}}" alt="imagen receta" onerror="this.src='{{asset('assets/images/image_notfound.jpg')}}';" width="50%"></center>
     </div>
     <center><h4>Proceso</h4></center>
