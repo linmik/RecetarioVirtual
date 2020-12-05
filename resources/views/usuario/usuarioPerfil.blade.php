@@ -1,9 +1,11 @@
 @extends('layouts.Arquitect')
 
 @section('contenido')
-    <img src="{{$user->profile_photo_url}}" width="20%">
-    <h1> {{$user->name}}</h1>
-
+    <div class="row">
+        <img width="100" class="rounded-circle col-1"  src= {{ asset(Auth::user()->profile_photo_url) }} alt="">
+        <h1> {{$user->name}}</h1>
+    </div>
+    <hr>
 
     <div class="row">
         @foreach ($user->recetas as $receta)
