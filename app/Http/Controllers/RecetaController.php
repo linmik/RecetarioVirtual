@@ -131,12 +131,18 @@ class RecetaController extends Controller
     {
         $ingrediente = Ingrediente::firstOrCreate(['nombre' => $request->nombre]);
         $receta->ingredientes()->attach($ingrediente->id,['cantidad' => $request->cantidad]);
-        return redirect()->route('recetas.ingredientes',[$receta->id]);
+        return redirect()->route('recetas.ingredientes',[$receta->id])->with([
+            'mensaje' => 'Ingrediente aregado Correctamente',
+            'alert-type' => 'alert-info',
+        ]);
     }
 
     public function eliminarIngrediente(Request $request, Receta $receta)
     {
         $receta->ingredientes()->detach($request->only('id'));
-        return redirect()->route('recetas.ingredientes',[$receta->id]);
+        return redirect()->route('recetas.ingredientes',[$receta->id])->with([
+            'mensaje' => 'Ingrediente eliminado de la receta',
+            'alert-type' => 'alert-info',
+        ]);;
     }
 }

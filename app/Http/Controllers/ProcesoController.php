@@ -42,7 +42,10 @@ class ProcesoController extends Controller
         ]);
 
         Proceso::create($request->all());
-        return redirect()->route('recetas.agregarProcesos',[$request->receta_id]);
+        return redirect()->route('recetas.agregarProcesos',[$request->receta_id])->with([
+            'mensaje' => 'Proceso añadido a la receta',
+            'alert-type' => 'alert-info',
+        ]);
     }
 
     /**
@@ -94,6 +97,9 @@ class ProcesoController extends Controller
     {
         $receta = $proceso->receta_id;
         $proceso->delete();
-        return redirect()->route('recetas.agregarProcesos',[$receta]);
+        return redirect()->route('recetas.agregarProcesos',[$receta])->with([
+            'mensaje' => 'Proceso eliminado de la receta',
+            'alert-type' => 'alert-info',
+        ]);
     }
 }

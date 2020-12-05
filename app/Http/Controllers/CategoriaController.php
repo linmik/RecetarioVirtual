@@ -48,7 +48,10 @@ class CategoriaController extends Controller
     {
         Gate::authorize('admin');
         $categoria = Categoria::create($request->all());
-        return redirect()->route('categorias.index');
+        return redirect()->route('categorias.index')->with([
+            'mensaje' => 'Categoria agregada Correctamente',
+            'alert-type' => 'alert-info',
+        ]);;
     }
 
     /**
