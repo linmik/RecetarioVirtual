@@ -47,6 +47,9 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         Gate::authorize('admin');
+        $request->validate([
+            'nombre' => ['string','max:255','required'],
+        ]);
         $categoria = Categoria::create($request->all());
         return redirect()->route('categorias.index')->with([
             'mensaje' => 'Categoria agregada Correctamente',
@@ -86,6 +89,9 @@ class CategoriaController extends Controller
     public function update(Request $request, Categoria $categoria)
     {
         Gate::authorize('admin');
+        $request->validate([
+            'nombre' => ['string','max:255','required'],
+        ]);
         Categoria::where('id',$categoria->id)->update($request->except('_token','_method'));
         return redirect()->route('categorias.index')->with([
             'mensaje' => 'Categoria Modificada Correctamente',

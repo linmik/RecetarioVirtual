@@ -129,6 +129,10 @@ class RecetaController extends Controller
 
     public function agregarIngrediente(Request $request,Receta $receta)
     {
+        $request->validate([
+            'nombre' => ['string','max:255','required'],
+            'cantidad' => ['string','max:255','required'],
+        ]);
         $ingrediente = Ingrediente::firstOrCreate(['nombre' => $request->nombre]);
         $receta->ingredientes()->attach($ingrediente->id,['cantidad' => $request->cantidad]);
         return redirect()->route('recetas.ingredientes',[$receta->id])->with([

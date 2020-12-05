@@ -2,13 +2,6 @@
 
 @section('contenido')
     <center><h1>Recetas</h1></center>
-    <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
-        <li class="nav-item">
-            <a  class="nav-link" id="tab-1" href="{{ route('recetas.create') }}" >
-                <span><h5>Crear una nueva receta</h5></span>
-            </a>
-        </li>
-    </ul>
 
     <div class="row">
         @php
