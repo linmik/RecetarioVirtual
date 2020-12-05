@@ -34,6 +34,7 @@
             @include('layouts.MenuLateralIzquierdo')
             <div class="app-main__outer">
                 <div class="app-main__inner">
+                    @include('partials.mensaje')
                     @yield('contenido')
                 </div>
             </div>

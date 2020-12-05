@@ -39,10 +39,10 @@ class UserFactory extends Factory
         });
     }
 
-    public function administrador() {
+    public function admin() {
         return $this->state(function(array $attributes) {
             return [
-                'tipo' => 'Administrador',
+                'tipo' => 'admin',
             ];
         });
     }
