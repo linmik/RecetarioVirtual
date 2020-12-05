@@ -21,8 +21,8 @@ class Receta extends Model
         'categoria_id'
     ];
 
-    public function setNombreAttribute($value){
-        return $this->attributes['titulo'] = ucwords($value);
+    public function getTituloAttribute($value){
+        return ucwords(strtolower($value));
     }
 
     public function categoria()
