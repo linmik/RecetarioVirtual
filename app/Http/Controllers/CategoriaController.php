@@ -84,7 +84,10 @@ class CategoriaController extends Controller
     {
         Gate::authorize('admin');
         Categoria::where('id',$categoria->id)->update($request->except('_token','_method'));
-        return redirect()->route('categorias.index');
+        return redirect()->route('categorias.index')->with([
+            'mensaje' => 'Categoria Modificada Correctamente',
+            'alert-type' => 'alert-info',
+        ]);
     }
 
     /**
