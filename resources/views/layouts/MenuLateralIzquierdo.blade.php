@@ -33,7 +33,7 @@
             <ul class="vertical-nav-menu">
                 <li class="app-sidebar__heading">Inicio</li>
                 <li>
-                    <a href="index.html" class="mm-active">
+                    <a href="{{route('recetas.index')}}" class="mm-active">
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Ir a Inicio
                     </a>
@@ -59,7 +59,7 @@
                 </li>
                 <li class="app-sidebar__heading">Mi Cuenta</li>
                 <li>
-                    <a href="index.html" class="mm-active">
+                    <a href="{{route('usuario.perfil',Auth::user())}}" class="mm-active">
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Mis Recetas
                     </a>
