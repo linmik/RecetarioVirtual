@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProcesoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecetaController;
@@ -40,5 +41,6 @@ Route::middleware('auth')->group(function(){
     Route::get('/recetas/{receta}/agregarProceso',[RecetaController::class,'agregarProcesos'])->name('recetas.agregarProcesos');
     Route::resource('/recetas',RecetaController::class);
     Route::resource('/procesos',ProcesoController::class);
+    Route::resource('/categorias',CategoriaController::class);
 });
 

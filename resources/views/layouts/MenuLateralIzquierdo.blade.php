@@ -64,6 +64,15 @@
                         Mis Recetas
                     </a>
                 </li>
+                @can('admin')
+                    <li class="app-sidebar__heading">Administrador</li>
+                    <li>
+                        <a href="{{route('categorias.index')}}" class="mm-active">
+                            <i class="metismenu-icon pe-7s-rocket"></i>
+                            Editar categorias
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
     </div>
