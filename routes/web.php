@@ -21,7 +21,7 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('recetas.index');
 });
 
 
