@@ -1,7 +1,7 @@
 # Proyecto Final: Recetario Virtual
 
-Alaniz, Miguel
-Franco, Ramón
+Alaniz, Miguel  
+Franco, Ramón  
 Universidad de Guadalajara  
 Programación para Internet
 
