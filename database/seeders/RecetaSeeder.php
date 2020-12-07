@@ -2,17 +2,19 @@
 
 namespace Database\Seeders;
 
+use App\Models\Receta;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+
+class RecetaSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        $this->call(CategoriaSeeder::class);
+        Receta::factory()->times(20)->create();
     }
 }

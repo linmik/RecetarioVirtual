@@ -12,34 +12,47 @@
 @endif
 <div class= "tab-content">
     <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
-        @foreach ($receta->procesos as $proceso)
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <h5>{{$proceso->titulo}}</h5>
-                    <h6>{{$proceso->descripcion}}</h6>
-                    <a href="{{route('procesos.edit',[$proceso])}}" class= "mb-2 mr-2 btn-transition btn btn-outline-primary">Editar info</a>
-                    <form action="{{route('procesos.destroy',[$proceso])}}" method="post">
-                        @method('DELETE')
-                        @csrf
-                        <button class='mb-2 mr-2 btn-transition btn btn-outline-danger'>Eliminar</button>
-                    </form>
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <div class="vertical-without-time vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
+                    @foreach ($receta->procesos as $proceso)
+                    <div class="vertical-timeline-item vertical-timeline-element">
+                        <div>
+                            <span class="vertical-timeline-element-icon bounce-in">
+                                <i class="badge badge-dot badge-dot-xl badge-success"> </i>
+                            </span>
+                            <div class="vertical-timeline-element-content bounce-in">
+                                <h4 class="timeline-title"> {{$proceso->titulo}} </h4>
+                                <p>{{$proceso->descripcion}}</p>
+                                <div class="row">
+                                    <a href="{{route('procesos.edit',[$proceso])}}" class= "mb-2 mr-2 btn-icon-only btn-pill btn btn-outline-info font-size-xlg"> <i class="pe-7s-note btn-icon-wrapper"></i></a>
+                                    <form action="{{route('procesos.destroy',[$proceso])}}" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="mb-2 mr-2 btn-icon-only btn-pill btn btn-outline-danger font-size-xlg">
+                                            <i class="pe-7s-trash btn-icon-wrapper"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
-        @endforeach
-        <div class="main-card mb-3 card">
+        </div>
+        <div class="main-card mb-1 card">
             <div class="card-body">
                 <form action="{{route('procesos.store')}}" method="POST">
                     @csrf
-                    <div class= "position-relative form-group">
-                        <label for="titulo" class>Titulo: </label>
-                        <input type="text" name="titulo" id="titulo" value="{{old('titulo')}}" class="form-control"><br>
-                    </div>
-                    <div class= "position-relative form-group">
+                    <div class= "form-group">
+                        <div class="form-row">
+                            <label for="titulo" class = "col-1">Titulo: </label>
+                            <input type="text" name="titulo" id="titulo" value="{{old('titulo')}}" class="form-control col"><br>
+                        </div>
                         <input type="hidden" name="receta_id" id="receta_id" value="{{$receta->id}}">
                         <label for="descripcion" class>Descripción: </label><br>
                         <textarea name="descripcion" id="descripcion" cols="30" rows="3" class="form-control">{{old('descripcion')}}</textarea><br>
-                    </div>
-                    <div class= "position-relative form-group">
                         <center><button type="submit" class="mt-1 btn btn-primary">Agregar proceso</button></center>
                     </div>
                 </form>

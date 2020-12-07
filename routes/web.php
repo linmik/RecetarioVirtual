@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProcesoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecetaController;
+use App\Http\Controllers\UserController;
 use App\Models\Proceso;
 use App\Models\Receta;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,19 +21,26 @@ use App\Models\Receta;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('recetas.index');
 });
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    //return view('dashboard');
+    return redirect()->route('recetas.index');
 })->name('dashboard');
 
-Route::get('/recetas/{Receta}/ingredientes',[RecetaController::class,'ingredientes'])->name('recetas.ingrediente')->middleware('auth');
-Route::post('/recetas/{Receta}/ingredientes',[RecetaController::class,'agregarIngrediente'])->name('recetas.agregarIngrediente')->middleware('auth');
-Route::delete('/recetas/{Receta}/{Ingrediente}',[RecetaController::class,'eliminarIngrediente'])->name('recetas.eliminarIngrediente')->middleware('auth');
 
-Route::get('/recetas/{Receta}/agregarProceso',[RecetaController::class,'agregarProcesos'])->name('recetas.agregarProcesos')->middleware('auth');
-Route::resource('/recetas',RecetaController::class)->middleware('auth');
+Route::middleware('auth')->group(function(){
 
-Route::resource('/procesos',ProcesoController::class)->middleware('auth');
+    Route::get('users/{user}/perfil',[UserController::class,'perfil'])->name('usuario.perfil');
+
+    Route::get('/recetas/{receta}/ingredientes',[RecetaController::class,'ingredientes'])->name('recetas.ingredientes');
+    Route::post('/recetas/{receta}/ingrediente',[RecetaController::class,'agregarIngrediente'])->name('recetas.agregarIngrediente');
+    Route::delete('/recetas/{receta}/ingrediente/{ingrediente}',[RecetaController::class,'eliminarIngrediente'])->name('recetas.eliminarIngrediente');
+    Route::get('/recetas/{receta}/agregarProceso',[RecetaController::class,'agregarProcesos'])->name('recetas.agregarProcesos');
+    Route::resource('/recetas',RecetaController::class);
+    Route::resource('/procesos',ProcesoController::class);
+    Route::resource('/categorias',CategoriaController::class);
+});
+

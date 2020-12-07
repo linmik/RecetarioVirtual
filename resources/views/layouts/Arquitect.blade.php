@@ -29,15 +29,14 @@
             <button type="button" id="TooltipDemo" class="btn-open-options btn btn-warning">
                 <i class="fa fa-cog fa-w-16 fa-spin fa-2x"></i>
             </button>
-        @include('layouts.MenuLateralDerecho')
         </div>
         <div class="app-main">
             @include('layouts.MenuLateralIzquierdo')
             <div class="app-main__outer">
                 <div class="app-main__inner">
+                    @include('partials.mensaje')
                     @yield('contenido')
                 </div>
-                @include('layouts.Footer')
             </div>
             <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
         </div>

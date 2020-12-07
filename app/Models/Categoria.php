@@ -10,6 +10,11 @@ class Categoria extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $fillable = [
+        'nombre'
+    ];
+
+
     public function recetas()
     {
         return $this->hasMany(Receta::class);

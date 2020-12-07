@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Receta extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
     protected $fillable = [
         'user_id',
         'titulo',
@@ -17,6 +20,10 @@ class Receta extends Model
         'imagen',
         'categoria_id'
     ];
+
+    public function getTituloAttribute($value){
+        return ucwords(strtolower($value));
+    }
 
     public function categoria()
     {
@@ -30,7 +37,7 @@ class Receta extends Model
 
     public function ingredientes()
     {
-        return $this->hasMany(Ingrediente::class);
+        return $this->belongsToMany(Ingrediente::class)->withPivot('cantidad');
     }
 
     public function User()

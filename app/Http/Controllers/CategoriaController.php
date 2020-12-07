@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Receta;
+//use Illuminate\Auth\Access\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CategoriaController extends Controller
 {
+
+    public function __construct()
+    {
+        //$this->middleware('es_admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,9 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        Gate::authorize('admin');
+        $categorias = Categoria::all();
+        return view('categorias.categoriasIndex',compact('categorias'));
     }
 
     /**
@@ -24,7 +36,6 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -35,7 +46,15 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Gate::authorize('admin');
+        $request->validate([
+            'nombre' => ['string','max:255','required'],
+        ]);
+        $categoria = Categoria::create($request->all());
+        return redirect()->route('categorias.index')->with([
+            'mensaje' => 'Categoria agregada Correctamente',
+            'alert-type' => 'alert-info',
+        ]);;
     }
 
     /**
@@ -46,7 +65,7 @@ class CategoriaController extends Controller
      */
     public function show(Categoria $categoria)
     {
-        //
+
     }
 
     /**
@@ -69,7 +88,15 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, Categoria $categoria)
     {
-        //
+        Gate::authorize('admin');
+        $request->validate([
+            'nombre' => ['string','max:255','required'],
+        ]);
+        Categoria::where('id',$categoria->id)->update($request->except('_token','_method'));
+        return redirect()->route('categorias.index')->with([
+            'mensaje' => 'Categoria Modificada Correctamente',
+            'alert-type' => 'alert-info',
+        ]);
     }
 
     /**
@@ -80,6 +107,5 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        //
     }
 }

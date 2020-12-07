@@ -33,9 +33,22 @@
             <ul class="vertical-nav-menu">
                 <li class="app-sidebar__heading">Inicio</li>
                 <li>
-                    <a href="index.html" class="mm-active">
+                    <a href="{{route('recetas.index')}}" class="mm-active">
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Ir a Inicio
+                    </a>
+                </li>
+                <li class="app-sidebar__heading">Mi Cuenta</li>
+                <li>
+                    <a href="{{route('usuario.perfil',Auth::user())}}" class="mm-active">
+                        <i class="metismenu-icon pe-7s-rocket"></i>
+                        Mis Recetas
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('recetas.create') }}" class="mm-active">
+                        <i class="metismenu-icon pe-7s-rocket"></i>
+                        Crear nueva receta
                     </a>
                 </li>
                 <li class="app-sidebar__heading">Recetas</li>
@@ -57,13 +70,15 @@
                         Recetas de cuentas seguidas
                     </a>
                 </li>
-                <li class="app-sidebar__heading">Mi Cuenta</li>
-                <li>
-                    <a href="index.html" class="mm-active">
-                        <i class="metismenu-icon pe-7s-rocket"></i>
-                        Mis Recetas
-                    </a>
-                </li>
+                @can('admin')
+                    <li class="app-sidebar__heading">Administrador</li>
+                    <li>
+                        <a href="{{route('categorias.index')}}" class="mm-active">
+                            <i class="metismenu-icon pe-7s-rocket"></i>
+                            Editar categorias
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
     </div>
