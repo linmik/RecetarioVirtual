@@ -32,4 +32,4 @@ Demo del proyecto accesible en [Heroku](http://proyecto-recetario-virtual.heroku
 
 ## Licencia
 
-[MIT]()
+[MIT](https://github.com/linmik/RecetarioVirtual/blob/main/LICENSE)
